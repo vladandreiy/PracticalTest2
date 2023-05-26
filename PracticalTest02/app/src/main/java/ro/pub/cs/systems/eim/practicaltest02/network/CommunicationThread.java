@@ -65,19 +65,31 @@ public class CommunicationThread extends Thread {
             String[] parts = calcul.split(",");
             String operation = parts[0];
             if (operation.equals("add")) {
-                long add_result = Integer.parseInt(parts[1]) + Integer.parseInt(parts[2]);
-                if (add_result > Integer.MAX_VALUE)
+                long operand1 = Long.parseLong(parts[1]);
+                long operand2 = Long.parseLong(parts[2]);
+                if (operand1 > Integer.MAX_VALUE || operand2 > Integer.MAX_VALUE)
                     result = "overflow";
-                else
-                    result = String.valueOf(add_result);
-
+                else {
+                    long add_result = operand1 + operand2;
+                    if (add_result > Integer.MAX_VALUE)
+                        result = "overflow";
+                    else
+                        result = String.valueOf(add_result);
+                }
             } else if (operation.equals("mul")) {
-                Thread.sleep(500);
-                long mul_result = (long) Integer.parseInt(parts[1]) * Integer.parseInt(parts[2]);
-                if (mul_result > Integer.MAX_VALUE)
+                Thread.sleep(2000);
+                long operand1 = Long.parseLong(parts[1]);
+                long operand2 = Long.parseLong(parts[2]);
+                if (operand1 > Integer.MAX_VALUE || operand2 > Integer.MAX_VALUE)
                     result = "overflow";
-                else
-                    result = String.valueOf(mul_result);
+                else {
+                    long mul_result = operand1 * operand2;
+                    if (mul_result > Integer.MAX_VALUE)
+                        result = "overflow";
+                    else
+                        result = String.valueOf(mul_result);
+                }
+
             }
             printWriter.println(result);
             printWriter.flush();
